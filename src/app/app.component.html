@@ -1,0 +1,41 @@
+
+<p class="font-sans text-5xl text-center">Cuisine for Ingredients</p>
+
+<div class="bg-blue-600 text-center min-h-32 place-content-top mt-5">
+  <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Selected Ingredients</h2>
+  <button (click)="search()" class="bg-gray-300 rounded-full outline outline-offset-2 outline-pink-500 p-2" [disabled]="!chosenIngr.length">Search for recipies</button>
+  <ul class="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400 place-content-center pl-10" style="margin-left: 10rem;">
+      <li class="flex items-center place-content-center" *ngFor="let selIngr of chosenIngr">
+          <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+          </svg>
+          {{selIngr}}
+      </li>
+  </ul>
+</div>
+
+<form class="max-w-md mx-auto mt-5">   
+  <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+  <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+      </div>
+      <input (keyup)="filterme($event)" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="filter ingredients" required />
+  </div>
+</form>
+<div class="grid grid-cols-6 gap-4 overflow-y-auto h-64 mt-5 border-solid border-4 border-sky-500" >
+  <div *ngFor="let ingr of ingredientList">
+    <input type="checkbox" value="{{ingr}}" (change)="pickIngr($event)" [checked]="chosenIngr.indexOf(ingr)>-1">
+    {{ingr}}
+  </div>
+</div>
+
+<div class="mt-5 grid grid-cols-4 gap-4" *ngIf="results?.length">
+  <div *ngFor="let res of results">
+    <p>{{res.title}}</p>
+    <img src="{{res.image}}">
+  </div>
+</div>
+<router-outlet />
