@@ -15,3 +15,6 @@ To get started really quick, follow these steps:
 
 Use the above API key and update the apiKey field in `/src/env.ts` file.
 
+
+---------------------------------------------------------------------------------
+[![Watch the video](https://img.youtube.com/vi/1MsLc2M_hA0/maxresdefault.jpg)](https://youtu.be/1MsLc2M_hA0)
